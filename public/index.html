@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue</title>
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link rel="stylesheet" href="./css/styles.css">
+  <script src="./js/bundle.js"></script>
+</head>
+<body>
+  <div id="app">
+    <label for="euros">Amount of Euros:</label>
+    <input type="number" name="euros" v-model="amount">
+    <br>
+    <select v-model="currency" v-on:change="setRate()">
+      <option disabled value="">Select Currency</option>
+      <option
+      v-for="(rate, currency) in exchangeRates.rates"
+      >
+      {{ currency }}
+      </option>
+    </select>
+    <br>
+    <h3 v-if="currency">Converted Amount: {{ convertedAmount}} {{ currency }}</h3>
+    <br>
+    <div v-if="currency">
+    <label for="second">Amount of {{ currency }}:</label>
+    <input type="number" name="second" v-model="otherAmount">
+    <br>
+    <h3 v-if="currency">Converted Amount: {{ convertedOtherAmount }} euros</h3>
+    </div>
+    <br>
+    <div >
+      <label for="">Convert From:</label>
+      <select v-model="firstCurrency" v-on:change="setFirstRate()">
+        <option disabled value="">Select Currency</option>
+        <option
+        v-for="(firstRate, firstCurrency) in exchangeRates.rates"
+        >
+        {{ firstCurrency }}
+        </option>
+      </select>
+      <label for="">Convert To:</label>
+      <select v-model="secondCurrency" v-on:change="setSecondRate()">
+        <option disabled value="">Select Currency</option>
+        <option
+        v-for="(secondRate, secondCurrency) in exchangeRates.rates"
+        >
+        {{ secondCurrency }}
+        </option>
+
+      </select>
+      <label for="doubleconv">Convert {{ firstCurrency }}:</label>
+      <input type="number" name="doubleconv" v-model="doubleConvAmount">
+      <br>
+      <h3>Converted Amount: {{ doubleConvertedAmount }} {{ secondCurrency }}</h3>
+    </div>
+  </div>
+</body>
+</html>
